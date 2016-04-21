@@ -1,0 +1,7 @@
+ 
+# under repo, start server
+
+python -m SimpleHTTPServer 8000
+
+
+# in the browser, input http://localhost:8000/brazil.html

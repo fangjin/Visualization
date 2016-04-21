@@ -22,14 +22,14 @@
 
 .bubble-userhome {
   fill: steelblue;
-  fill-opacity: .5;
+  fill-opacity: .7;
   stroke: #fff;
   stroke-width: .5px;
 }
 
 .bubble-gsr {
   fill: green;
-  fill-opacity: .5;
+  fill-opacity: .7;
   stroke: #fff;
   stroke-width: .5px;
 }
