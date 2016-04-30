@@ -13,6 +13,13 @@
   stroke-linecap: round;
 }
 
+.subunit-boundary {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
 .bubble-geofocus {
   fill: brown;
   fill-opacity: .5;
@@ -51,10 +58,10 @@ var width = 960,
 
 var projection = d3.geo
     .conicConformal()
-    .rotate([6, 10])
-    .center([-52, -6])
-    .parallels([20, 68])
-    .scale(560);
+    .rotate([66.6, 0])
+    .center([0, 6.4])
+    .parallels([0, 13])
+    .scale(2400);
     //.translate([width / 2, height / 2]);
 
 var path = d3.geo.path().projection(projection);
@@ -67,9 +74,9 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 queue()
-    .defer(d3.json, "Mexico-new-state.json")
-    .defer(d3.json, "Mexico_non-climate.json")
-    .defer(d3.json, "Mexico_climate.json")
+    .defer(d3.json, "ven.json")
+    .defer(d3.json, "Venezuela_non-climate.json")
+    .defer(d3.json, "Venezuela_climate.json")
     .await(ready);
 
 function ready(error, br, gsr, alerts) {
@@ -78,11 +85,17 @@ function ready(error, br, gsr, alerts) {
        .attr("class", "land")
        .datum(topojson.feature(br, br.objects.states))
        .attr("d", path);
+/*
     svg.append("path")
       .datum(topojson.mesh(br, br.objects.states, function(a, b) {
                  return a.properties.name !== b.properties.name; }))
-      .attr("class", "border border--state")
+      .attr("class", "border--state")
       .attr("d", path);
+*/
+    svg.append("path")
+      .datum(topojson.mesh(br, br.objects.states, function(a, b) { return a !== b; }))
+      .attr("d", path)
+      .attr("class", "subunit-boundary");  
 
   svg.append("g")
       .attr("class", "bubble-userhome")
